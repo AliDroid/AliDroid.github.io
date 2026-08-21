@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>敬拜赞美 · 诗歌分享</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f6f8; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+  .card { background:#fff; border-radius:16px; padding:32px 24px; max-width:340px; width:100%; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+  .logo { font-size:13px; color:#999; letter-spacing:2px; }
+  .name { font-size:20px; color:#c0392b; font-weight:600; margin:16px 0; }
+  .tip { font-size:13px; color:#999; margin:12px 0; }
+  .btn { display:inline-block; background:#c0392b; color:#fff; padding:12px 32px; border-radius:24px; font-size:16px; text-decoration:none; margin:8px 4px; border:none; cursor:pointer; }
+  .btn.ghost { background:#fff; color:#c0392b; border:1px solid #c0392b; }
+  .guide { font-size:12px; color:#999; margin:16px 0 4px; line-height:1.7; }
+  #fallback { display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">敬拜赞美 · 诗歌分享</div>
+  <p class="name">《<span id="songName">诗歌</span>》</p>
+  <p class="tip" id="status">正在尝试打开 App 播放…</p>
+  <div id="fallback">
+    <button class="btn" onclick="openApp()">打开 App 播放</button>
+    <p class="guide">若在微信内无法打开，请点右上角「···」→「在浏览器打开」</p>
+    <a class="btn ghost" id="downloadLink" href="#">下载安装 App</a>
+  </div>
+</div>
+<script>
+  var name = '';
+  try { name = decodeURIComponent(new URLSearchParams(location.search).get('name') || ''); } catch(e) { name = ''; }
+  document.getElementById('songName').textContent = name || '诗歌';
+
+  var scheme = 'jocabmusic://song?name=' + encodeURIComponent(name);
+  var hidden = false;
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) hidden = true; });
+
+  function openApp() {
+    hidden = false;
+    document.getElementById('status').textContent = '正在尝试打开 App…';
+    location.href = scheme;
+    setTimeout(function(){
+      if (!hidden) {
+        document.getElementById('status').textContent = '未能自动打开，请手动操作';
+        document.getElementById('fallback').style.display = 'block';
+      }
+    }, 1500);
+  }
+
+  openApp();
+
+  fetch('https://media.jocab.top/apk/latest.txt', { cache: 'no-store' })
+    .then(function(r){ return r.text(); })
+    .then(function(v){ document.getElementById('downloadLink').href = 'https://media.jocab.top/apk/jocabmusic-v' + v.trim() + '.apk'; })
+    .catch(function(){});
+</script>
+</body>
+</html>

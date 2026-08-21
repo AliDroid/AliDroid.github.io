@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>敬拜赞美 · 歌单分享</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f6f8; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+  .card { background:#fff; border-radius:16px; padding:32px 24px; max-width:340px; width:100%; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+  .logo { font-size:13px; color:#999; letter-spacing:2px; }
+  h2 { font-size:20px; color:#333; margin:12px 0 4px; }
+  .sub { font-size:13px; color:#999; margin-bottom:8px; }
+  .list { text-align:left; font-size:14px; color:#555; margin:8px 0 12px; max-height:180px; overflow:auto; border-top:1px solid #f0f0f0; }
+  .list div { padding:7px 4px; border-bottom:1px solid #f0f0f0; }
+  .tip { font-size:13px; color:#999; margin:12px 0; }
+  .btn { display:inline-block; background:#c0392b; color:#fff; padding:12px 32px; border-radius:24px; font-size:16px; text-decoration:none; margin:8px 4px; border:none; cursor:pointer; }
+  .btn.ghost { background:#fff; color:#c0392b; border:1px solid #c0392b; }
+  .guide { font-size:12px; color:#999; margin:16px 0 4px; line-height:1.7; }
+  #fallback { display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">敬拜赞美 · 歌单分享</div>
+  <h2 id="plTitle">分享的歌单</h2>
+  <p class="sub">共 <span id="plCount">0</span> 首诗歌</p>
+  <div class="list" id="plList"></div>
+  <p class="tip" id="status">正在尝试打开 App…</p>
+  <div id="fallback">
+    <button class="btn" onclick="openApp()">打开 App 查看</button>
+    <p class="guide">若在微信内无法打开，请点右上角「···」→「在浏览器打开」</p>
+    <a class="btn ghost" id="downloadLink" href="#">下载安装 App</a>
+  </div>
+</div>
+<script>
+  var title = '', names = [];
+  try {
+    var q = new URLSearchParams(location.search);
+    title = decodeURIComponent(q.get('title') || '') || '分享的歌单';
+    names = (decodeURIComponent(q.get('names') || '')).split(',').filter(function(s){ return s; });
+  } catch(e) {}
+  document.getElementById('plTitle').textContent = title;
+  document.getElementById('plCount').textContent = names.length;
+  var html = '';
+  names.forEach(function(n, i){ html += '<div>' + (i + 1) + '. ' + n + '</div>'; });
+  document.getElementById('plList').innerHTML = html || '<div>暂无歌曲</div>';
+
+  var scheme = 'jocabmusic://playlist?title=' + encodeURIComponent(title) + '&names=' + encodeURIComponent(names.join(','));
+  var hidden = false;
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) hidden = true; });
+
+  function openApp() {
+    hidden = false;
+    document.getElementById('status').textContent = '正在尝试打开 App…';
+    location.href = scheme;
+    setTimeout(function(){
+      if (!hidden) {
+        document.getElementById('status').textContent = '未能自动打开，请手动操作';
+        document.getElementById('fallback').style.display = 'block';
+      }
+    }, 1500);
+  }
+
+  openApp();
+
+  fetch('https://media.jocab.top/apk/latest.txt', { cache: 'no-store' })
+    .then(function(r){ return r.text(); })
+    .then(function(v){ document.getElementById('downloadLink').href = 'https://media.jocab.top/apk/jocabmusic-v' + v.trim() + '.apk'; })
+    .catch(function(){});
+</script>
+</body>
+</html>

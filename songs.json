@@ -1,5 +1,46 @@
 [
   {
+    "date": "2026-08-24",
+    "title": "2026年8月30日诗歌 | 敬拜赞美",
+    "songs": [
+      {
+        "name": "耶和华是爱",
+        "author": "个人上传",
+        "audioUrl": "https://media.jocab.top/%E8%80%B6%E5%92%8C%E5%8D%8E%E6%98%AF%E7%88%B1.mp3",
+        "imageUrl": "https://media.jocab.top/%E8%80%B6%E5%92%8C%E5%8D%8E%E6%98%AF%E7%88%B1.jpeg",
+        "lrc": ""
+      },
+      {
+        "name": "主我敬拜你",
+        "author": "个人上传",
+        "audioUrl": "https://media.jocab.top/%E4%B8%BB%E6%88%91%E6%95%AC%E6%8B%9C%E4%BD%A0.mp3",
+        "imageUrl": "https://media.jocab.top/%E4%B8%BB%E6%88%91%E6%95%AC%E6%8B%9C%E4%BD%A0.jpeg",
+        "lrc": ""
+      },
+      {
+        "name": "我的心你要称颂耶和华",
+        "author": "个人上传",
+        "audioUrl": "https://media.jocab.top/%E6%88%91%E7%9A%84%E5%BF%83%E4%BD%A0%E8%A6%81%E7%A7%B0%E9%A2%82%E8%80%B6%E5%92%8C%E5%8D%8E.mp3",
+        "imageUrl": "https://media.jocab.top/%E6%88%91%E7%9A%84%E5%BF%83%E4%BD%A0%E8%A6%81%E7%A7%B0%E9%A2%82%E8%80%B6%E5%92%8C%E5%8D%8E.jpeg",
+        "lrc": ""
+      },
+      {
+        "name": "主恩更多歌",
+        "author": "个人上传",
+        "audioUrl": "https://media.jocab.top/%E4%B8%BB%E6%81%A9%E6%9B%B4%E5%A4%9A%E6%AD%8C.mp3",
+        "imageUrl": "https://media.jocab.top/%E4%B8%BB%E6%81%A9%E6%9B%B4%E5%A4%9A%E6%AD%8C.jpeg",
+        "lrc": ""
+      },
+      {
+        "name": "满有能力",
+        "author": "个人上传",
+        "audioUrl": "https://media.jocab.top/%E6%BB%A1%E6%9C%89%E8%83%BD%E5%8A%9B.mp3",
+        "imageUrl": "https://media.jocab.top/%E6%BB%A1%E6%9C%89%E8%83%BD%E5%8A%9B.jpeg",
+        "lrc": ""
+      }
+    ]
+  },
+  {
     "date": "2026-08-18",
     "title": "2026年8月23日诗歌 | 敬拜赞美",
     "songs": [
